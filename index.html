@@ -593,10 +593,11 @@ async function loadJeezyArticles() {
     const container = document.getElementById("articles-container");
 
     try {
-        const response = await fetch("/api/articles");
+        const response = await fetch("https://jeezydropz-news.jeezydropz.workers.dev/api/articles");
         if (!response.ok) throw new Error("API unavailable");
 
-        const articles = await response.json();
+        const data = await response.json();
+        const articles = data.articles || [];
         if (!articles.length) throw new Error("No articles");
 
         renderArticles(articles);
